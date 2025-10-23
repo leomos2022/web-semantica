@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backpropagation y Web Semántica - FinFlow Intelligence</title>
+    
+    <!-- CSS Framework y Librerías -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Three.js para visualizaciones 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+    
+    <!-- Chart.js para gráficos interactivos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- MathJax para ecuaciones matemáticas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loader inicial -->
+    <div id="loader" class="loader">
+        <div class="neural-network-loader">
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="connection"></div>
+            <div class="connection"></div>
+        </div>
+        <p>Cargando Inteligencia Artificial...</p>
+    </div>
+
+    <!-- Header Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>FinFlow Intelligence</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Inicio</a></li>
+                <li><a href="#backpropagation" class="nav-link">Backpropagation</a></li>
+                <li><a href="#semantic-web" class="nav-link">Web Semántica</a></li>
+                <li><a href="#case-study" class="nav-link">Caso FinFlow</a></li>
+                <li><a href="#simulation" class="nav-link">Simulación</a></li>
+                <li><a href="#references" class="nav-link">Referencias</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <canvas id="neural-canvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="gradient-text">Backpropagation</span> y 
+                <span class="gradient-text">Web Semántica</span>
+            </h1>
+            <p class="hero-subtitle">
+                Explorando algoritmos de aprendizaje automático y sistemas de razonamiento semántico 
+                para la automatización inteligente en servicios financieros
+            </p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="scrollToSection('backpropagation')">
+                    <i class="fas fa-rocket"></i> Explorar Algoritmos
+                </button>
+                <button class="btn-secondary" onclick="scrollToSection('simulation')">
+                    <i class="fas fa-play"></i> Ver Simulación
+                </button>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Backpropagation Section -->
+    <section id="backpropagation" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Algoritmo Backpropagation</h2>
+                <p class="section-description">
+                    Comprende el funcionamiento interno del algoritmo fundamental para el entrenamiento de redes neuronales artificiales
+                </p>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3><i class="fas fa-info-circle"></i> Fundamentos Teóricos</h3>
+                    <p>
+                        El algoritmo de <strong>backpropagation</strong> (retropropagación) es un método de optimización 
+                        basado en gradientes utilizado para entrenar redes neuronales artificiales. Desarrollado por 
+                        Rumelhart, Hinton y Williams (1986), este algoritmo utiliza la regla de la cadena del cálculo 
+                        diferencial para calcular eficientemente los gradientes de la función de pérdida con respecto 
+                        a los pesos de la red.
+                    </p>
+                    
+                    <div class="math-formula">
+                        <h4>Ecuación Principal del Gradiente:</h4>
+                        <div class="formula-box">
+                            $$\frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial o_j} \cdot \frac{\partial o_j}{\partial net_j} \cdot \frac{\partial net_j}{\partial w_{ij}}$$
+                        </div>
+                        <p class="formula-explanation">
+                            Donde <em>E</em> es la función de error, <em>w<sub>ij</sub></em> son los pesos, 
+                            <em>o<sub>j</sub></em> es la salida de la neurona <em>j</em>, y <em>net<sub>j</sub></em> 
+                            es la entrada neta.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3><i class="fas fa-cogs"></i> Proceso del Algoritmo</h3>
+                    <div class="algorithm-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Forward Pass</h4>
+                                <p>Propagación hacia adelante de las señales de entrada a través de la red</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Cálculo del Error</h4>
+                                <p>Comparación de la salida obtenida con la salida deseada</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Backward Pass</h4>
+                                <p>Retropropagación del error hacia las capas anteriores</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Actualización de Pesos</h4>
+                                <p>Ajuste de los pesos basado en los gradientes calculados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualización 3D del Backpropagation -->
+            <div class="visualization-container">
+                <h3><i class="fas fa-cube"></i> Visualización 3D Interactiva</h3>
+                <div class="viz-controls">
+                    <button id="play-animation" class="btn-primary">
+                        <i class="fas fa-play"></i> Reproducir Animación
+                    </button>
+                    <button id="pause-animation" class="btn-secondary">
+                        <i class="fas fa-pause"></i> Pausar
+                    </button>
+                    <button id="reset-animation" class="btn-outline">
+                        <i class="fas fa-redo"></i> Reiniciar
+                    </button>
+                </div>
+                <div id="backprop-viz" class="viz-3d"></div>
+                <div class="viz-info">
+                    <div class="info-panel">
+                        <h4>Estado Actual:</h4>
+                        <div id="animation-status">Listo para iniciar</div>
+                        <div class="metrics">
+                            <div class="metric">
+                                <span>Época:</span>
+                                <span id="epoch">0</span>
+                            </div>
+                            <div class="metric">
+                                <span>Error:</span>
+                                <span id="error">0.00</span>
+                            </div>
+                            <div class="metric">
+                                <span>Precisión:</span>
+                                <span id="accuracy">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Semántica Section -->
+    <section id="semantic-web" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Web Semántica y Razonamiento</h2>
+                <p class="section-description">
+                    Descubre cómo los sistemas de razonamiento semántico revolucionan el procesamiento automatizado de información
+                </p>
+            </div>
+
+            <div class="semantic-grid">
+                <div class="semantic-card">
+                    <div class="card-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Ontologías y RDF</h3>
+                    <p>
+                        Las ontologías proporcionan un vocabulario común y una estructura formal para representar 
+                        conocimiento en dominios específicos. El Resource Description Framework (RDF) permite 
+                        expresar información como tripletas sujeto-predicado-objeto, facilitando la interoperabilidad 
+                        y el intercambio de datos estructurados (Berners-Lee et al., 2001).
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">RDF</span>
+                        <span class="tech-tag">RDFS</span>
+                        <span class="tech-tag">OWL</span>
+                    </div>
+                </div>
+
+                <div class="semantic-card">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Inferencia Lógica</h3>
+                    <p>
+                        Los motores de inferencia utilizan reglas lógicas para derivar nuevos conocimientos a partir 
+                        de hechos existentes. Esto permite que los sistemas descubran relaciones implícitas y 
+                        generen respuestas inteligentes basadas en el razonamiento automático (Horrocks et al., 2004).
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">SWRL</span>
+                        <span class="tech-tag">SPARQL</span>
+                        <span class="tech-tag">Pellet</span>
+                    </div>
+                </div>
+
+                <div class="semantic-card">
+                    <div class="card-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Consultas Semánticas</h3>
+                    <p>
+                        SPARQL Protocol and RDF Query Language permite realizar consultas complejas sobre 
+                        grafos de conocimiento, extrayendo información específica y realizando análisis 
+                        sofisticados de datos enlazados (Prud'hommeaux & Seaborne, 2008).
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">SPARQL</span>
+                        <span class="tech-tag">GraphQL</span>
+                        <span class="tech-tag">Jena</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparación de ventajas -->
+            <div class="comparison-section">
+                <h3><i class="fas fa-balance-scale"></i> Ventajas de la Inferencia Semántica</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4>vs. Sistemas Tradicionales</h4>
+                        <ul>
+                            <li><strong>Razonamiento Automático:</strong> Deriva conclusiones sin programación explícita</li>
+                            <li><strong>Interoperabilidad:</strong> Estándares abiertos permiten integración seamless</li>
+                            <li><strong>Escalabilidad:</strong> Maneja grandes volúmenes de datos estructurados</li>
+                            <li><strong>Flexibilidad:</strong> Adapta reglas de negocio dinámicamente</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>En Motores de Búsqueda</h4>
+                        <ul>
+                            <li><strong>Comprensión Contextual:</strong> Entiende la intención del usuario</li>
+                            <li><strong>Resultados Enriquecidos:</strong> Proporciona respuestas estructuradas</li>
+                            <li><strong>Desambiguación:</strong> Resuelve ambigüedades semánticas</li>
+                            <li><strong>Personalización:</strong> Adapta resultados al perfil del usuario</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>En Asistentes Virtuales</h4>
+                        <ul>
+                            <li><strong>Diálogo Natural:</strong> Mantiene contexto conversacional</li>
+                            <li><strong>Aprendizaje Continuo:</strong> Mejora con cada interacción</li>
+                            <li><strong>Integración de Servicios:</strong> Conecta múltiples fuentes de datos</li>
+                            <li><strong>Respuestas Inteligentes:</strong> Genera respuestas contextualmente relevantes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Caso de Estudio FinFlow -->
+    <section id="case-study" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Caso de Estudio: FinFlow Intelligence</h2>
+                <p class="section-description">
+                    Implementación práctica de sistemas de razonamiento semántico en servicios financieros
+                </p>
+            </div>
+
+            <div class="case-study-content">
+                <div class="problem-statement">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Problemática Actual</h3>
+                    <div class="problem-grid">
+                        <div class="problem-item">
+                            <i class="fas fa-clock"></i>
+                            <h4>Demoras en Procesamiento</h4>
+                            <p>Los agentes requieren interpretación manual de solicitudes ambiguas</p>
+                        </div>
+                        <div class="problem-item">
+                            <i class="fas fa-bug"></i>
+                            <h4>Errores de Clasificación</h4>
+                            <p>Derivación incorrecta de solicitudes a departamentos inadecuados</p>
+                        </div>
+                        <div class="problem-item">
+                            <i class="fas fa-users"></i>
+                            <h4>Sobrecarga Operativa</h4>
+                            <p>Recursos humanos limitados para volumen creciente de consultas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-architecture">
+                    <h3><i class="fas fa-lightbulb"></i> Arquitectura de Solución</h3>
+                    <div class="architecture-diagram">
+                        <div id="architecture-viz" class="architecture-3d"></div>
+                        <div class="architecture-controls">
+                            <button class="layer-btn active" data-layer="input">Capa de Entrada</button>
+                            <button class="layer-btn" data-layer="processing">Procesamiento</button>
+                            <button class="layer-btn" data-layer="inference">Inferencia</button>
+                            <button class="layer-btn" data-layer="output">Salida</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ontology-section">
+                    <h3><i class="fas fa-sitemap"></i> Ontología Financiera</h3>
+                    <div class="ontology-components">
+                        <div class="ontology-card">
+                            <h4>Entidades Principales</h4>
+                            <ul>
+                                <li><strong>Cliente:</strong> Perfil, historial, segmentación</li>
+                                <li><strong>Solicitud:</strong> Tipo, monto, propósito, urgencia</li>
+                                <li><strong>Producto:</strong> Créditos, inversiones, seguros</li>
+                                <li><strong>Política:</strong> Reglas de negocio, criterios de aprobación</li>
+                            </ul>
+                        </div>
+                        <div class="ontology-card">
+                            <h4>Relaciones Semánticas</h4>
+                            <ul>
+                                <li><strong>tieneHistorialCrediticio:</strong> Cliente → Historial</li>
+                                <li><strong>requiereAprobacion:</strong> Solicitud → Proceso</li>
+                                <li><strong>cumplePolítica:</strong> Solicitud → Política</li>
+                                <li><strong>asignadoA:</strong> Solicitud → Departamento</li>
+                            </ul>
+                        </div>
+                        <div class="ontology-card">
+                            <h4>Reglas de Inferencia (SWRL)</h4>
+                            <div class="code-block">
+                                <code>
+Cliente(?c) ∧ tieneIngresos(?c, ?i) ∧ 
+swrlb:greaterThan(?i, 5000) ∧
+Solicitud(?s) ∧ solicitadoPor(?s, ?c) →
+elegibleParaCredito(?s, true)
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="implementation-tech">
+                    <h3><i class="fas fa-tools"></i> Stack Tecnológico</h3>
+                    <div class="tech-grid">
+                        <div class="tech-category">
+                            <h4>Representación del Conocimiento</h4>
+                            <div class="tech-items">
+                                <span class="tech-badge rdf">RDF/RDFS</span>
+                                <span class="tech-badge owl">OWL 2 DL</span>
+                                <span class="tech-badge swrl">SWRL</span>
+                            </div>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Motores de Inferencia</h4>
+                            <div class="tech-items">
+                                <span class="tech-badge pellet">Pellet</span>
+                                <span class="tech-badge hermit">HermiT</span>
+                                <span class="tech-badge jena">Apache Jena</span>
+                            </div>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Consultas y APIs</h4>
+                            <div class="tech-items">
+                                <span class="tech-badge sparql">SPARQL 1.1</span>
+                                <span class="tech-badge graphql">GraphQL</span>
+                                <span class="tech-badge rest">REST API</span>
+                            </div>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Integración</h4>
+                            <div class="tech-items">
+                                <span class="tech-badge kafka">Apache Kafka</span>
+                                <span class="tech-badge docker">Docker</span>
+                                <span class="tech-badge k8s">Kubernetes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulación Interactiva -->
+    <section id="simulation" class="section alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Simulación Interactiva</h2>
+                <p class="section-description">
+                    Experimenta cómo funciona el sistema de procesamiento automático de solicitudes
+                </p>
+            </div>
+
+            <div class="simulation-container">
+                <div class="simulation-controls">
+                    <h3><i class="fas fa-sliders-h"></i> Panel de Control</h3>
+                    <div class="control-group">
+                        <label>Tipo de Solicitud:</label>
+                        <select id="request-type">
+                            <option value="credito">Apertura de Crédito</option>
+                            <option value="refinanciacion">Refinanciación</option>
+                            <option value="cancelacion">Cancelación</option>
+                            <option value="reclamo">Reclamo</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Perfil del Cliente:</label>
+                        <select id="client-profile">
+                            <option value="premium">Premium</option>
+                            <option value="gold">Gold</option>
+                            <option value="silver">Silver</option>
+                            <option value="nuevo">Nuevo Cliente</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Monto Solicitado:</label>
+                        <input type="range" id="amount" min="1000" max="100000" value="25000">
+                        <span id="amount-display">$25,000</span>
+                    </div>
+                    <button id="run-simulation" class="btn-primary">
+                        <i class="fas fa-play"></i> Ejecutar Simulación
+                    </button>
+                </div>
+
+                <div class="simulation-viz">
+                    <div id="process-flow" class="process-visualization">
+                        <!-- Visualización del flujo de procesamiento -->
+                    </div>
+                    <div class="inference-steps">
+                        <h4>Pasos de Inferencia:</h4>
+                        <div id="inference-log" class="inference-log">
+                            <p>Listo para procesar solicitud...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="simulation-results">
+                    <h3><i class="fas fa-chart-line"></i> Resultados de la Simulación</h3>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h4>Decisión Automatizada</h4>
+                            <div id="decision-result" class="decision-display">
+                                Pendiente de simulación
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <h4>Departamento Asignado</h4>
+                            <div id="department-result" class="department-display">
+                                Pendiente de simulación
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <h4>Tiempo de Procesamiento</h4>
+                            <div id="time-result" class="time-display">
+                                0 ms
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <h4>Nivel de Confianza</h4>
+                            <div id="confidence-result" class="confidence-display">
+                                0%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos de Performance -->
+            <div class="performance-section">
+                <h3><i class="fas fa-tachometer-alt"></i> Métricas de Rendimiento</h3>
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <canvas id="accuracy-chart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <canvas id="processing-time-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Referencias Académicas -->
+    <section id="references" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Referencias Académicas</h2>
+                <p class="section-description">
+                    Bibliografía completa en formato APA 7ma Edición
+                </p>
+            </div>
+
+            <div class="references-content">
+                <div class="reference-category">
+                    <h3><i class="fas fa-book"></i> Fuentes Principales (APA 7ma Edición)</h3>
+                    <div class="reference-list">
+                        <div class="reference-item">
+                            <p>
+                                Berners-Lee, T., Hendler, J., & Lassila, O. (2001). The semantic web. 
+                                <em>Scientific American</em>, <em>284</em>(5), 34-43. 
+                                https://doi.org/10.1038/scientificamerican0501-34
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Cimmino, A., & Corchuelo, R. (2020). Sorbas: Learning context-aware 
+                                link rules. En A. Cimmino & R. Corchuelo (Eds.), <em>Enterprise information integration: 
+                                On discovering links using genetic programming</em> (pp. 59-74). Dykinson.
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Hitzler, P., Krötzsch, M., Parsia, B., Patel-Schneider, P. F., & Rudolph, S. (2012). 
+                                <em>OWL 2 web ontology language primer</em> (2nd ed.). World Wide Web Consortium. 
+                                https://www.w3.org/TR/owl2-primer/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Marcondes, C. H. (2018). <em>Datos abiertos enlazados de archivos, bibliotecas 
+                                y museos en la web</em> (pp. 33-89). Editorial UOC.
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Rumelhart, D. E., Hinton, G. E., & Williams, R. J. (1986). Learning 
+                                representations by back-propagating errors. <em>Nature</em>, <em>323</em>(6088), 533-536. 
+                                https://doi.org/10.1038/323533a0
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Studer, R., Benjamins, V. R., & Fensel, D. (1998). Knowledge engineering: 
+                                Principles and methods. <em>Data & Knowledge Engineering</em>, <em>25</em>(1-2), 161-197. 
+                                https://doi.org/10.1016/S0169-023X(97)00056-6
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Šustr, Z., Vacek, J., & Šimůnek, M. (2019). Minimax algorithm enhancement for 
+                                the game of dots-and-boxes. <em>International Journal of Computer Games Technology</em>, 
+                                <em>2019</em>, Article 5346108. https://doi.org/10.1155/2019/5346108
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reference-category">
+                    <h3><i class="fas fa-graduation-cap"></i> Fuentes Complementarias (APA 7ma Edición)</h3>
+                    <div class="reference-list">
+                        <div class="reference-item">
+                            <p>
+                                Bouzy, B. (2020). Monte-Carlo tree search applications to games and beyond. 
+                                <em>Computers & Games</em>, <em>12516</em>, 3-17. 
+                                https://doi.org/10.1007/978-3-030-65883-0_1
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Goodfellow, I., Bengio, Y., & Courville, A. (2016). <em>Deep learning</em>. 
+                                MIT Press. https://www.deeplearningbook.org/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Gruber, T. R. (1993). A translation approach to portable ontology specifications. 
+                                <em>Knowledge Acquisition</em>, <em>5</em>(2), 199-220. 
+                                https://doi.org/10.1006/knac.1993.1008
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Lecun, Y., Bottou, L., Bengio, Y., & Haffner, P. (1998). Gradient-based 
+                                learning applied to document recognition. <em>Proceedings of the IEEE</em>, 
+                                <em>86</em>(11), 2278-2324. https://doi.org/10.1109/5.726791
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Payne, T. R., Presutti, V., Qi, G., Poveda-Villalón, M., Stoilos, G., 
+                                Hollink, L., Kaoudi, Z., Cheng, G., & Li, J. (Eds.). (2023). 
+                                <em>The semantic web – ISWC 2023: 22nd International Semantic Web Conference, 
+                                Athens, Greece, November 6–10, 2023, Proceedings, Part I</em>. Springer Nature. 
+                                https://doi.org/10.1007/978-3-031-47240-4
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Prud'hommeaux, E., & Seaborne, A. (2008, January 15). <em>SPARQL query language for RDF</em>. 
+                                World Wide Web Consortium. https://www.w3.org/TR/rdf-sparql-query/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Russell, S. J., & Norvig, P. (2020). <em>Artificial intelligence: A modern approach</em> 
+                                (4th ed.). Pearson.
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Schmidhuber, J. (2015). Deep learning in neural networks: An overview. 
+                                <em>Neural Networks</em>, <em>61</em>, 85-117. 
+                                https://doi.org/10.1016/j.neunet.2014.09.003
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reference-category">
+                    <h3><i class="fas fa-link"></i> Recursos Web y Herramientas (APA 7ma Edición)</h3>
+                    <div class="reference-list">
+                        <div class="reference-item">
+                            <p>
+                                Apache Software Foundation. (2023). <em>Apache Jena: A free and open source Java 
+                                framework for building semantic web and linked data applications</em>. 
+                                https://jena.apache.org/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Google. (2023). <em>TensorFlow: An end-to-end open source machine learning platform</em>. 
+                                https://www.tensorflow.org/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Keras Team. (2023). <em>Keras: Deep learning for humans</em>. 
+                                https://keras.io/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                PyTorch Foundation. (2023). <em>PyTorch: An open source machine learning framework 
+                                that accelerates the path from research prototyping to production deployment</em>. 
+                                https://pytorch.org/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Stanford University. (2023). <em>Protégé: A free, open-source ontology editor and 
+                                framework for building intelligent systems</em>. 
+                                https://protege.stanford.edu/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                World Wide Web Consortium. (2012, December 11). <em>OWL 2 web ontology language 
+                                document overview</em> (2nd ed.). https://www.w3.org/TR/owl2-overview/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                World Wide Web Consortium. (2014, febrero 25). <em>RDF 1.1 concepts and abstract syntax</em>. 
+                                https://www.w3.org/TR/rdf11-concepts/
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Referencias específicas del caso de uso y foro -->
+                <div class="reference-category">
+                    <h3><i class="fas fa-university"></i> Referencias del Caso de Estudio (APA 7ma Edición)</h3>
+                    <div class="reference-list">
+                        <div class="reference-item">
+                            <p>
+                                Antoniou, G., & Van Harmelen, F. (2004). <em>A semantic web primer</em>. 
+                                MIT Press.
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Baader, F., Horrocks, I., Lutz, C., & Sattler, U. (2017). <em>An introduction 
+                                to description logic</em>. Cambridge University Press. 
+                                https://doi.org/10.1017/9781139025355
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Domingue, J., Fensel, D., & Hendler, J. A. (Eds.). (2011). <em>Handbook of 
+                                semantic web technologies</em>. Springer. 
+                                https://doi.org/10.1007/978-3-540-92913-0
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                García-Castro, R., & Gómez-Pérez, A. (2010). Interoperability results for 
+                                semantic web technologies using OWL as the interchange language. 
+                                <em>Web Semantics: Science, Services and Agents on the World Wide Web</em>, 
+                                <em>8</em>(4), 278-291. https://doi.org/10.1016/j.websem.2010.06.004
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Hendler, J., Berners-Lee, T., & Miller, E. (2002). Integrating applications 
+                                on the semantic web. <em>Journal of the Institute of Electrical Engineers of Japan</em>, 
+                                <em>122</em>(10), 676-680. https://doi.org/10.1541/ieejjournal.122.676
+                            </p>
+                        </div>        
+                        <div class="reference-item">
+                            <p>
+                                Lassila, O., & Swick, R. R. (1999, febrero 22). <em>Resource description framework 
+                                (RDF) model and syntax specification</em>. World Wide Web Consortium. 
+                                https://www.w3.org/TR/1999/REC-rdf-syntax-19990222/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                McGuinness, D. L., & Van Harmelen, F. (2004, febrero 10). <em>OWL web ontology 
+                                language overview</em>. World Wide Web Consortium. 
+                                https://www.w3.org/TR/owl-features/
+                            </p>
+                        </div>
+                        <div class="reference-item">
+                            <p>
+                                Motik, B., Patel-Schneider, P. F., Parsia, B., Bock, C., Fokoue, A., 
+                                Haase, P., Hoekstra, R., Horrocks, I., Ruttenberg, A., Sattler, U., & 
+                                Smith, M. (2009, octubre 27). <em>OWL 2 web ontology language structural 
+                                specification and functional-style syntax</em> (2nd ed.). 
+                                World Wide Web Consortium. https://www.w3.org/TR/owl2-syntax/
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FinFlow Intelligence</h4>
+                    <p>
+                        Leonardo Mosquera 000922268
+                        Jessica Silva 000918680
+                        Uber Harley Cardoso Gutiérrez
+
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tecnologías</h4>
+                    <ul>
+                        <li>Backpropagation Algorithm</li>
+                        <li>Semantic Web Technologies</li>
+                        <li>OWL & RDF</li>
+                        <li>SPARQL & SWRL</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos</h4>
+                    <ul>
+                        <li><a href="#simulation">Simulación Interactiva</a></li>
+                        <li><a href="#references">Referencias APA</a></li>
+                        <li><a href="#case-study">Caso de Estudio</a></li>
+                        <li><a href="#backpropagation">Visualizaciones 3D</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto Académico</h4>
+                    <p>
+                        <i class="fas fa-envelope"></i> 
+                        leonardo.mosquera@uniminuto.edu.co
+                    </p>
+                    <p>
+                        <i class="fas fa-university"></i> 
+                        Corporacion Universitaria Minuto de Dios
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; NRC-3335-Inteligencia Artificial y Sistemas Inteligentes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

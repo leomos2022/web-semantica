@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integración Semántica en FinFlow</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #f4f7fb;
+    margin: 0;
+    padding: 40px;
+    color: #222;
+  }
+  h1 {
+    text-align: center;
+    color: #0A2540;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  thead {
+    background: #0A2540;
+    color: white;
+  }
+  th, td {
+    padding: 16px;
+    text-align: left;
+    vertical-align: top;
+  }
+  tr:nth-child(even) {
+    background: #f2f6fa;
+  }
+  th {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  td {
+    font-size: 14px;
+    line-height: 1.5em;
+  }
+  .rdf { border-left: 8px solid #007BFF; }
+  .owl { border-left: 8px solid #28A745; }
+  .swrl { border-left: 8px solid #FFC107; }
+  .sparql { border-left: 8px solid #DC3545; }
+  strong { color: #0A2540; }
+</style>
+</head>
+<body>
+
+<h1>Integración Semántica en FinFlow</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tecnología</th>
+      <th>Rol en FinFlow</th>
+      <th>Integración con Sistemas Existentes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="rdf">
+      <td><strong>RDF (Resource Description Framework)</strong></td>
+      <td>Modela las solicitudes ambiguas, el perfil del cliente y las políticas internas como <strong>tripletas (sujeto–predicado–objeto)</strong>, creando un <strong>Grafo de Conocimiento unificado</strong> Marcondes (2018), (p.33).</td>
+      <td>Se desarrollan <strong>Adaptadores/Mappers</strong> que transforman datos estructurados (BBDD relacionales), semi-estructurados (JSON de chatbots) y no estructurados (texto de correos) a formato RDF. <br><strong>Herramientas:</strong> R2RML.</td>
+    </tr>
+    <tr class="owl">
+      <td><strong>OWL (Web Ontology Language)</strong></td>
+      <td>Define la <strong>Ontología Financiera</strong> con clases, propiedades y restricciones lógicas que estructuran el dominio (Tipos de solicitudes, Perfiles de cliente, Políticas internas).</td>
+      <td>La ontología se carga en un <strong>motor de razonamiento</strong> (Apache Jena u Owlready2) que opera sobre el grafo RDF para deducir nuevas relaciones.</td>
+    </tr>
+    <tr class="swrl">
+      <td><strong>SWRL (Semantic Web Rule Language)</strong></td>
+      <td>Permite expresar <strong>reglas de negocio complejas</strong> que no pueden ser modeladas únicamente con OWL-DL (ej.: “Si X es ClientePremium y solicita Cancelación, entonces Y”).</td>
+      <td>Las reglas SWRL se ejecutan en conjunto con el razonador para generar <strong>conclusiones más ricas y específicas</strong> para la toma de decisiones.</td>
+    </tr>
+    <tr class="sparql">
+      <td><strong>SPARQL</strong></td>
+      <td>Permite consultar el grafo RDF/OWL, incluyendo los <strong>hechos inferidos</strong>. Ejemplo: “¿Cuál es el área de derivación (tieneDerivacion) para la Solicitud (S456)?” → Atención VIP.</td>
+      <td>Se expone una <strong>API REST</strong> (Apache Jena Fuseki o GraphDB) que acepta consultas SPARQL desde los sistemas de atención al cliente (CRM, chatbot) para respuestas y acciones automatizadas en tiempo real.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
